@@ -11,18 +11,10 @@ class Users:
         self.is_admin = is_admin
         
 
-    def login(self):
-        pass
-
 
 class Comments:
     """class contains comments cases"""
-
-    def add_comment(self):
-        pass
-
-    def edit_comment(self):
-        pass
-
-    def delete_comment(self):
-        pass
+    def __init__(self, comment, timestamp, user):
+        self.comment = comment
+        self.timestamp = timestamp
+        self.user = user

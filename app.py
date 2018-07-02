@@ -1,13 +1,14 @@
-import click
+import datetime
 
-from models import Users, users
+from models import Users, users, Comments, comments
 
-@click.command()
+session = {}
+
 def register():
     """
     Register into account
     """
-    click.echo('Register below: ')
+    print('Register below: ')
     username = input('Enter your username: ')
     email = input('Enter your email: ')
     password = input('Enter your password: ')
@@ -15,26 +16,51 @@ def register():
     if email not in users:
         new_user = Users(username, email, password)
         users[email] = new_user.__dict__
-        click.echo('Login successful...')
+        print('Signup successful...')
     else:
-        click.echo('That email already exists')
+        print('That email already exists')
 
-@click.command()
 def login():
     """
     Login into account
     """
-    click.echo('Enter your login details: ')
+    print('Enter your login details: ')
     email = input('Enter your email: ')
     password = input('Enter your password: ')
 
     if not email in users:
-        click.echo('You are not registered!!')
-        register()
+        print('You are not registered!!')
 
-    click.echo('login successful')
+    session['logged_in'] = email
+    print('login successful')
 
+def add_comments():
+    """
+    add comments
+    """
+    comment = input("What's on your mind? ")
+    timestamp = datetime.time()
+    user = session['logged_in']
+    new_comment = Comments(comment, timestamp, user)
+    if len(comments) == 0:
+        comments[1] = new_comment.__dict__
+    else:
+        comments[len(comments)+1] = new_comment.__dict__
 
-if __name__ == '__main__':
-    register()
-    #login()
+def see_comments():
+    """
+    get comments
+    """
+    for key in comments:
+        print(comments[key])
+
+def edit_comments(comment_id):
+    """
+    update comment
+    """
+    pass
+    
+register()
+login()
+add_comments()
+see_comments()
