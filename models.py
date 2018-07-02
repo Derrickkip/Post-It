@@ -3,9 +3,13 @@ comments = {}
 
 class Users:
     """Class contains users cases"""
-
-    def register(self):
-        pass
+    def __init__(self, username, email, password, is_moderator=False, is_admin=False):
+        self.username = username
+        self.email = email
+        self.password = password
+        self.is_moderator = is_moderator
+        self.is_admin = is_admin
+        
 
     def login(self):
         pass
